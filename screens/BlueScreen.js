@@ -1,15 +1,37 @@
-import { useContext } from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { useContext, useState } from "react";
+import { Text, View, StyleSheet, TextInput, Button } from "react-native";
 
 import { UserContext } from "../context/userContext";
 
 function BlueScreen({ navigation }) {
   const userNameCtx = useContext(UserContext);
+  const [firstName, setFirstName] = useState();
+  const [lastName, setLastName] = useState();
+
+  function onChangeFirstName(newFirstName) {
+    setFirstName(newFirstName);
+  }
+
+  function onChangeLastName(newLastName) {
+    setFirstName(newLastName);
+  }
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Verify your first and last names.</Text>
-      <Text style={styles.text}>{userNameCtx.firstName} {userNameCtx.lastName}</Text>
+      <Text style={styles.text}>Enter your name</Text>
+      <TextInput
+        value={firstName}
+        placeholder={"First Name"}
+        onChangeText={onChangeFirstName}
+        style={styles.input}
+      />
+      <TextInput
+        value={lastName}
+        placeholder={"Last Name"}
+        onChangeText={onChangeLastName}
+        style={styles.input}
+      />
+      <Button title="Next" onPress={() => console.log("pressed the button")} />
     </View>
   );
 }
@@ -30,5 +52,13 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     textAlign: "center",
+  },
+  input: {
+    height: 40,
+    minWidth: 200,
+    margin: 6,
+    borderWidth: 1,
+    borderColor: "darkblue",
+    padding: 10,
   },
 });
