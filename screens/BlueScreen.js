@@ -13,7 +13,13 @@ function BlueScreen({ navigation }) {
   }
 
   function onChangeLastName(newLastName) {
-    setFirstName(newLastName);
+    setLastName(newLastName);
+  }
+
+  function onPressNext() {
+    userNameCtx.addFirstName(firstName);
+    userNameCtx.addLastName(lastName);
+    navigation.navigate("Phone");
   }
 
   return (
@@ -21,17 +27,19 @@ function BlueScreen({ navigation }) {
       <Text style={styles.text}>Enter your name</Text>
       <TextInput
         value={firstName}
-        placeholder={"First Name"}
+        placeholder="First Name"
         onChangeText={onChangeFirstName}
+        cursorColor="#333"
         style={styles.input}
       />
       <TextInput
         value={lastName}
-        placeholder={"Last Name"}
+        placeholder="Last Name"
         onChangeText={onChangeLastName}
+        cursorColor="#333"
         style={styles.input}
       />
-      <Button title="Next" onPress={() => console.log("pressed the button")} />
+      <Button title="Next" color="darkblue" onPress={onPressNext} />
     </View>
   );
 }

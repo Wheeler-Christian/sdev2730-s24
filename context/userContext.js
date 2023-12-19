@@ -3,18 +3,20 @@ import { createContext, useState } from "react";
 export const UserContext = createContext({
   firstName: "",
   lastName: "",
-  phone: "",
-  email: "",
+  // phoneNum: "",
+  // email: "",
+  addFirstName: (newFirstName) => {},
+  addLastName: (newLastName) => {},
+
 });
 
 function UserContextProvider({ children }) {
   // set up state
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [phone, setPhone] = useState("");
+  const [phoneNum, setPhoneNum] = useState("");
   const [email, setEmail] = useState("");
 
-  // set up functions to use state
   function addFirstName(newFirstName) {
     setFirstName(newFirstName);
   }
@@ -23,8 +25,8 @@ function UserContextProvider({ children }) {
     setLastName(newLastName);
   }
 
-  function addPhone(newPhone) {
-    setPhone(newPhone);
+  function addPhoneNum(newPhoneNum) {
+    setPhoneNum(newPhoneNum);
   }
 
   function addEmail(newEmail) {
@@ -34,12 +36,12 @@ function UserContextProvider({ children }) {
   const value = {
     firstName: firstName,
     lastName: lastName,
-    phone: phone,
+    phoneNum: phoneNum,
     email: email,
-    setFirstName: setFirstName,
-    setLastName: setLastName,
-    setPhone: setPhone,
-    setEmail: setEmail,
+    addFirstName: addFirstName,
+    addLastName: addLastName,
+    addPhoneNum: addPhoneNum,
+    addEmail: addEmail,
   };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;

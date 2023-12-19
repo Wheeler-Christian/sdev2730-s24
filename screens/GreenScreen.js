@@ -1,15 +1,37 @@
-import { useContext } from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { useContext, useState } from "react";
+import { Text, View, StyleSheet, TextInput, Button } from "react-native";
 
 import { UserContext } from "../context/userContext";
 
 function GreenScreen({ navigation }) {
-  const userNameCtx = useContext(UserContext);
+  const userPhoneCtx = useContext(UserContext);
+  const [phoneNum, setPhoneNum] = useState();
+
+  function onChangePhoneNum(newPhoneNum) {
+    setPhoneNum(newPhoneNum);
+  }
+
+  function onPressNext(){
+    userPhoneCtx.addPhoneNum(phoneNum);
+    navigation.navigate("Email");
+  }
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Verify your phone.</Text>
-      <Text style={styles.text}>{userNameCtx.phone}</Text>
+      <Text style={styles.text}>Enter your phone number</Text>
+      <TextInput
+        value={phoneNum}
+        placeholder="Phone Number"
+        onChangeText={onChangePhoneNum}
+        cursorColor="#333"
+        style={styles.input}
+        keyboardType="numeric"
+      />
+      <Button
+        title="Next"
+        color="darkgreen"
+        onPress={onPressNext}
+      />
     </View>
   );
 }
@@ -30,5 +52,13 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     textAlign: "center",
+  },
+  input: {
+    height: 40,
+    minWidth: 200,
+    margin: 6,
+    borderWidth: 1,
+    borderColor: "darkgreen",
+    padding: 10,
   },
 });
